@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জনগণনা গৃহতালিকা ফর্ম (৩৪ প্রশ্ন)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef2f5; margin: 0; padding: 15px; }
+        .container { max-width: 1350px; margin: auto; display: flex; flex-wrap: wrap; gap: 20px; }
+        .form-box { flex: 1.3; min-width: 360px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .table-box { flex: 1.7; min-width: 360px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2, h3 { color: #ff6f00; margin-top: 0; border-bottom: 2px solid #ff6f00; padding-bottom: 5px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+        .form-group { margin-bottom: 6px; }
+        label { font-weight: bold; font-size: 11px; display: block; margin-bottom: 2px; color: #333; }
+        input, select { width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+        .btn { background: #ff6f00; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 15px; }
+        .btn-print { background: #28a745; display: none; margin-top: 10px; }
+        .search-box { width: 100%; padding: 8px; border: 2px solid #ff6f00; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box; font-size: 13px; }
+        .tbl-container { max-height: 550px; overflow-x: auto; overflow-y: auto; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; }
+        th, td { padding: 6px 8px; border-bottom: 1px solid #ddd; white-space: nowrap; }
+        th { background: #ff6f00; color: white; position: sticky; top: 0; }
+
+        @media print {
+            .table-box, .btn, .search-box { display: none !important; }
+            .form-box { width: 100%; border: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- ফর্ম সেকশন -->
+    <div class="form-box">
+        <h2>গৃহতালিকা ও সুবিধা সংক্রান্ত প্রশ্নাবলী</h2>
+        <form id="censusForm">
+            <div class="form-grid">
+                <div class="form-group"><label>১. লাইন নম্বর</label><input type="text" id="c1" required></div>
+                <div class="form-group"><label>২. বিল্ডিং নম্বর</label><input type="text" id="c2" required></div>
+                <div class="form-group"><label>৩. জনগণনা বাড়ি নম্বর</label><input type="text" id="c3" required></div>
+                
+                <div class="form-group">
+                    <label>৪. মেঝে তৈরির উপাদান</label>
+                    <select id="c4">
+                        <option value="1-মাটি">১-মাটি</option><option value="2-কাঠ/বাঁশ">২-কাঠ/বাঁশ</option><option value="3-পোড়া ইট">৩-পোড়া ইট</option>
+                        <option value="4-পাথর">৪-পাথর</option><option value="5-সিমেন্ট">৫-সিমেন্ট</option><option value="6-মোসাইক/টাইলস">৬-মোসাইক/টাইলস</option><option value="7-অন্যান্য">৭-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>৫. দেওয়ালের উপাদান</label>
+                    <select id="c5">
+                        <option value="1-ঘাস/খড়/বাঁশ">১-ঘাস/খড়/বাঁশ</option><option value="2-প্লাস্টিক">২-প্লাস্টিক</option><option value="3-কাঁচা ইট/মাটি">৩-কাঁচা ইট/মাটি</option>
+                        <option value="4-কাঠ">৪-কাঠ</option><option value="5-গাঁথুনি ছাড়া পাথর">৫-গাঁথুনি ছাড়া পাথর</option><option value="6-গাঁথুনিসহ পাথর">৬-গাঁথুনিসহ পাথর</option>
+                        <option value="7-টিন/অ্যাসবেস্টস">৭-টিন/অ্যাসবেস্টস</option><option value="8-পোড়া ইট">৮-পোড়া ইট</option><option value="9-কনক্রিট">৯-কনক্রিট</option><option value="0-অন্যান্য">০-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>৬. ছাদের উপাদান</label>
+                    <select id="c6">
+                        <option value="1-ঘাস/খড়/মাটি">১-ঘাস/খড়/মাটি</option><option value="2-প্লাস্টিক">২-প্লাস্টিক</option><option value="3-হাতে তৈরি টাইলস">৩-হাতে তৈরি টাইলস</option>
+                        <option value="4-মেশিনে তৈরি টাইলস">৪-মেশিনে তৈরি টাইলস</option><option value="5-পোড়া ইট">৫-পোড়া ইট</option><option value="6-পাথর">৬-পাথর</option>
+                        <option value="7-স্লেট">৭-স্লেট</option><option value="8-টিন/অ্যাসবেস্টস">৮-টিন/অ্যাসবেস্টস</option><option value="9-কনক্রিট">৯-কনক্রিট</option><option value="0-অন্যান্য">০-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>৭. ব্যবহারের উদ্দেশ্য</label>
+                    <select id="c7">
+                        <option value="1-বসতবাড়ি">১-বসতবাড়ি</option><option value="2-বসতবাড়ি ও অন্যান্য">২-বসতবাড়ি ও অন্যান্য</option><option value="3-দোকান/অফিস">৩-দোকান/অফিস</option>
+                        <option value="4-স্কুল/কলেজ">৪-স্কুল/কলেজ</option><option value="5-হোটেল/লজ">৫-হোটেল/লজ</option><option value="6-হাসপাতাল">৬-হাসপাতাল</option>
+                        <option value="7-কারখানা">৭-কারখানা</option><option value="8-উপাসনালয়">৮-উপাসনালয়</option><option value="9-অন্যান্য">৯-অন্যান্য</option><option value="0-ফাঁকা">০-ফাঁকা</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>৮. বাড়ির অবস্থা</label>
+                    <select id="c8">
+                        <option value="1-ভালো">১-ভালো</option><option value="2-বসবাসযোগ্য">২-বসবাসযোগ্য</option><option value="3-জীর্ণ/জরাজীর্ণ">৩-জীর্ণ/জরাজীর্ণ</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>৯. পরিবার নম্বর</label><input type="text" id="c9"></div>
+                <div class="form-group"><label>১০. মোট সদস্য সংখ্যা</label><input type="number" id="c10"></div>
+                <div class="form-group"><label>১১. পরিবার প্রধানের নাম</label><input type="text" id="c11" required></div>
+                
+                <div class="form-group">
+                    <label>১২. প্রধানের লিঙ্গ</label>
+                    <select id="c12">
+                        <option value="1-পুরুষ">১-পুরুষ</option><option value="2-মহিলা">২-মহিলা</option><option value="3-তৃতীয় লিঙ্গ">৩-তৃতীয় লিঙ্গ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>১৩. সামাজিক শ্রেণী</label>
+                    <select id="c13">
+                        <option value="1-SC">১-SC</option><option value="2-ST">২-ST</option><option value="3-অন্যান্য">৩-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>১৪. মালিকানার ধরন</label>
+                    <select id="c14">
+                        <option value="1-নিজের বাড়ি">১-নিজের বাড়ি</option><option value="2-ভাড়া(অন্যত্র আছে)">২-ভাড়া (অন্যত্র বাড়ি আছে)</option>
+                        <option value="3-ভাড়া(অন্যত্র নেই)">৩-ভাড়া (অন্যত্র বাড়ি নেই)</option><option value="4-অন্যান্য">৪-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>১৫. থাকার ঘরের সংখ্যা</label><input type="number" id="c15"></div>
+                <div class="form-group"><label>১৬. বিবাহিত দম্পতি</label><input type="number" id="c16"></div>
+
+                <div class="form-group">
+                    <label>১৭. পানীয় জলের উৎস</label>
+                    <select id="c17">
+                        <option value="1-পরিশোধিত কল">১-পরিশোধিত কল</option><option value="2-অপরিশোধিত কল">২-অপরিশোধিত কল</option><option value="3-কুয়ো">৩-কুয়ো</option>
+                        <option value="4-হ্যান্ড পাম্প">৪-হ্যান্ড পাম্প</option><option value="5-টিউবওয়েল">৫-টিউবওয়েল</option><option value="6-ঝরনা">৬-ঝরনা</option>
+                        <option value="7-নদী/খাল">৭-নদী/খাল</option><option value="8-পুকুর">৮-পুকুর</option><option value="9-বোতলজাত জল">৯-বোতলজাত জল</option><option value="0-অন্যান্য">০-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>১৮. জলের প্রাপ্যতা</label>
+                    <select id="c18">
+                        <option value="1-পরিসরের ভেতরে">১-পরিসরের ভেতরে</option><option value="2-পরিসরের কাছাকাছি">২-পরিসরের কাছাকাছি</option><option value="3-দূরে">৩-দূরে</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>১৯. আলোর উৎস</label>
+                    <select id="c19">
+                        <option value="1-বিদ্যুৎ">১-বিদ্যুৎ</option><option value="2-কেরোসিন">২-কেরোসিন</option><option value="3-সৌরশক্তি">৩-সৌরশক্তি</option>
+                        <option value="4-অন্যান্য তেল">৪-অন্যান্য তেল</option><option value="5-অন্যান্য">৫-অন্যান্য</option><option value="6-আলোর ব্যবস্থা নেই">৬-আলোর ব্যবস্থা নেই</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>২০. শৌচাগারের সুবিধা</label>
+                    <select id="c20">
+                        <option value="1-নিজেরা ব্যবহার">১-শুধু নিজেদের ব্যবহারের জন্য</option><option value="2-যৌথ ব্যবহার">২-যৌথ ব্যবহার</option>
+                        <option value="3-পাবলিক শৌচাগার">৩-পাবলিক শৌচাগার</option><option value="4-শৌচাগার নেই">৪-শৌচাগার নেই</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>২১. শৌচাগারের ধরন</label><input type="text" id="c21" placeholder="ফ্ল্যাশ/ড্রেন/পিট"></div>
+                
+                <div class="form-group">
+                    <label>২২. নিষ্কাশন ব্যবস্থা</label>
+                    <select id="c22">
+                        <option value="1-ঢাকা ড্রেন">১-ঢাকা ড্রেন</option><option value="2-খোলা ড্রেন">২-খোলা ড্রেন</option><option value="3-ড্রেন নেই">৩-ড্রেন নেই</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>২৩. স্নানের সুবিধা</label>
+                    <select id="c23">
+                        <option value="1-হ্যাঁ(বাথরুম)">১-হ্যাঁ (বাথরুম আছে)</option><option value="2-ঘেরা জায়গা">২-ছাদ ছাড়া ঘেরা জায়গা</option><option value="3-সুবিধা নেই">৩-স্নানের সুবিধা নেই</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>২৪. রান্নাঘর ও LPG</label><input type="text" id="c24" placeholder="রান্নাঘর ও গ্যাস কানেকশন"></div>
+
+                <div class="form-group">
+                    <label>২৫. রান্নার জ্বালানি</label>
+                    <select id="c25">
+                        <option value="1-কাঠ">১-কাঠ</option><option value="2-খড়">২-খড়</option><option value="3-ঘুঁটে">৩-ঘুঁটে</option>
+                        <option value="4-কয়লা">৪-কয়লা</option><option value="5-কেরোসিন">৫-কেরোসিন</option><option value="6-LPG/PNG">৬-এলপিজি/পিএনজি</option>
+                        <option value="7-বিদ্যুৎ">৭-বিদ্যুৎ</option><option value="8-বায়োগ্যাস">৮-বায়োগ্যাস</option><option value="9-সৌরশক্তি">৯-সৌরশক্তি</option><option value="0-অন্যান্য">০-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>২৬. রেডিও/ট্রানজিস্টর</label><input type="text" id="c26"></div>
+
+                <div class="form-group">
+                    <label>২৭. টেলিভিশন</label>
+                    <select id="c27">
+                        <option value="1-দূরদর্শন ডিশ">১-দূরদর্শন ফ্রি ডিশ</option><option value="2-অন্যান্য DTH">২-অন্যান্য ডিটিএইচ</option>
+                        <option value="3-কেবুল সংযোগ">৩-কেবুল সংযোগ</option><option value="4-অন্যান্য">৪-অন্যান্য</option><option value="5-নেই">৫-নেই</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>২৮. ইন্টারনেট সুবিধা</label><input type="text" id="c28" placeholder="হ্যাঁ / না"></div>
+                <div class="form-group"><label>২৯. কম্পিউটার/ল্যাপটপ</label><select id="c29"><option value="1-হ্যাঁ">১-হ্যাঁ</option><option value="2-না">২-না</option></select></div>
+                
+                <div class="form-group">
+                    <label>৩০. টেলিফোন/মোবাইল</label>
+                    <select id="c30">
+                        <option value="1-ল্যান্ডলাইন">১-ল্যান্ডলাইন</option><option value="2-স্মার্টফোন">২-স্মার্টফোন</option>
+                        <option value="3-সাধারণ মোবাইল">৩-সাধারণ মোবাইল</option><option value="4-উভয়ই">৪-উভয়ই</option><option value="5-কোনোটিই নয়">৫-কোনোটিই নয়</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>৩১. বাইসাইকেল/বাইক</label><input type="text" id="c31" placeholder="হ্যাঁ / না"></div>
+                <div class="form-group"><label>৩২. গাড়ি/জিপ/ভ্যান</label><select id="c32"><option value="1-হ্যাঁ">১-হ্যাঁ</option><option value="2-না">২-না</option></select></div>
+
+                <div class="form-group">
+                    <label>৩৩. প্রধান খাদ্যশস্য</label>
+                    <select id="c33">
+                        <option value="1-চাল">১-চাল</option><option value="2-গম">২-গম</option><option value="3-জোয়ার">৩-জোয়ার</option>
+                        <option value="4-বাজরা">৪-বাজরা</option><option value="5-ভুট্টা">৫-ভুট্টা</option><option value="6-অন্যান্য">৬-অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>৩৪. মোবাইল নম্বর</label><input type="tel" id="c34" required></div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn">সেভ করুন (Google Sheet)</button>
+        </form>
+        <button id="printBtn" onclick="window.print()" class="btn btn-print">PDF ডাউনলোড / প্রিন্ট</button>
+    </div>
+
+    <!-- ডাটা লিস্ট সেকশন -->
+    <div class="table-box">
+        <h3>সংগৃহীত ডাটা ও লাইভ সার্চ</h3>
+        <input type="text" id="searchInput" class="search-box" onkeyup="searchData()" placeholder="নাম, বাড়ি নং বা মোবাইল দিয়ে খুঁজুন...">
+        <div class="tbl-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>লাইন</th><th>বিল্ডিং</th><th>প্রধানের নাম</th><th>সদস্য</th><th>মোবাইল</th><th>জ্বালানি</th>
+                    </tr>
+                </thead>
+                <tbody id="tblBody">
+                    <tr><td colspan="6">ডাটা লোড হচ্ছে...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyD4LceDBGM2Gu8IKn57q0OWR09W67-vQCnEC5eaio9v3XnBsYhzJRU1wqmHkp_N8Q/exec';
+    let rawData = [];
+
+    window.onload = fetchRecords;
+
+    async function fetchRecords() {
+        try {
+            const res = await fetch(SCRIPT_URL);
+            rawData = await res.json();
+            renderTable(rawData.reverse());
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    function renderTable(data) {
+        const tbody = document.getElementById('tblBody');
+        tbody.innerHTML = '';
+        if(data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6">কোনো তথ্য পাওয়া যায়নি</td></tr>';
+            return;
+        }
+        data.forEach(row => {
+            tbody.innerHTML += `<tr>
+                <td>${row[0] || ''}</td>
+                <td>${row[1] || ''}</td>
+                <td><b>${row[10] || ''}</b></td>
+                <td>${row[9] || ''}</td>
+                <td>${row[33] || ''}</td>
+                <td>${row[24] || ''}</td>
+            </tr>`;
+        });
+    }
+
+    function searchData() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = rawData.filter(row => 
+            String(row[10]).toLowerCase().includes(query) || 
+            String(row[1]).toLowerCase().includes(query) ||
+            String(row[33]).includes(query)
+        );
+        renderTable(filtered);
+    }
+
+    document.getElementById('censusForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerText = 'ডাটা সেভ হচ্ছে...';
+
+        let rowValues = [];
+        for(let i=1; i<=34; i++) {
+            rowValues.push(document.getElementById('c' + i).value);
+        }
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rowValues: rowValues })
+            });
+
+            alert('৩৪টি বাংলা তথ্যের বিবরণ সফলভাবে Google Sheet-এ সেভ হয়েছে!');
+            document.getElementById('printBtn').style.display = 'block';
+            submitBtn.innerText = 'সেভ করুন (Google Sheet)';
+            setTimeout(fetchRecords, 1500);
+        } catch (error) {
+            alert('সমস্যা হয়েছে: ' + error.message);
+            submitBtn.innerText = 'সেভ করুন (Google Sheet)';
+        }
+    });
+</script>
+
+</body>
+</html>
