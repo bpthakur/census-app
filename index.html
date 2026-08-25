@@ -3,11 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>জনগণনা গৃহতালিকা ও গৃহ গণনা ফর্ম</title>
+  <title>ভারতের জনগণনা 2027: গৃহতালিকা চিহ্নীকরণ ও গৃহগণনার প্রশ্নাবলী</title>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+    body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('cen.webp'); 
+  background-size: cover; 
+  background-position: center; 
+  background-attachment: fixed; 
+  margin: 0; 
+  padding: 20px; 
+  color: #333; 
+}
     .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+   h2 { 
+  text-align: center; 
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+  color: #ffffff; 
+  padding: 14px 20px; 
+  border-radius: 8px; 
+  font-size: 24px; 
+  font-weight: 700; 
+  letter-spacing: 0.5px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+  margin-top: 0; 
+  margin-bottom: 25px; 
+}
     .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 12px; border: none; background: #e0e0e0; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; }
     .tab-btn.active { background: #3498db; color: #fff; }
@@ -31,7 +53,14 @@
 <body>
 
 <div class="container">
-  <h2>জনগণনা গৃহতালিকা ও গৃহ গণনা সূচি</h2>
+  <!-- পেজের মূল শিরোনাম -->
+<h2>
+  ভারতের জনগণনা 2027
+  <br>
+  <span style="font-size: 18px; font-weight: normal; opacity: 0.95;">
+    গৃহতালিকা চিহ্নীকরণ ও গৃহগণনার প্রশ্নাবলী
+  </span>
+</h2>
   
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('form-tab')">ফর্ম ফিলাপ</button>
@@ -57,24 +86,69 @@
       <div class="form-group"><label>2. বিল্ডিং নম্বর (আঞ্চলিক)</label><input type="text" id="q2" required></div>
       <div class="form-group"><label>3. জনগণনা বাড়ি নম্বর</label><input type="text" id="q3" required></div>
       
-      <div class="form-group"><label>4. মেঝে তৈরির উপাদান</label>
-        <select id="q4"><option>কাদামাটি</option><option>বাঁশ/কাঠ</option><option>ইঁট</option><option>পাথর</option><option>সিমেন্ট</option><option>মোসাইক/টাইলস</option><option>অন্যান্য</option></select>
+      <!-- 4. মেঝে -->
+      <div class="form-group"><label>4. মেঝে তৈরীর প্রধান উপাদান</label>
+        <select id="q4">
+          <option value="1">1 - মাটি</option>
+          <option value="2">2 - কাঠ/বাঁশ</option>
+          <option value="3">3 - পোড়া ইট</option>
+          <option value="4">4 - পাথর</option>
+          <option value="5">5 - সিমেন্ট</option>
+          <option value="6">6 - মোজাইক/মেঝের টাইল</option>
+          <option value="0">0 - অন্যান্য</option>
+        </select>
       </div>
       
-      <div class="form-group"><label>5. দেওয়ালের উপাদান</label>
-        <select id="q5"><option>ঘাস/বাঁশ/নল</option><option>প্লাস্টিক/পলিথিন</option><option>কাঁচা ইঁট/কাদা</option><option>কাঠ</option><option>পাথর</option><option>পাকা ইঁট</option><option>জিআই/ধাতব শিট</option><option>কনক্রিট</option></select>
+      <!-- 5. দেওয়াল -->
+      <div class="form-group"><label>5. দেওয়ালের প্রধান উপাদান</label>
+        <select id="q5">
+          <option value="1">1 - ঘাস/খড়/বাঁশ ইত্যাদি</option>
+          <option value="2">2 - প্লাস্টিক/পলিথিন</option>
+          <option value="3">3 - মাটি/কাঁচা ইট</option>
+          <option value="4">4 - কাঠ</option>
+          <option value="5">5 - গাথনি না করা পাথর</option>
+          <option value="6">6 - গাথনি করা পাথর</option>
+          <option value="7">7 - জি.আই./মেটাল/এসবেস্টস শীট</option>
+          <option value="8">8 - পোড়া ইট</option>
+          <option value="9">9 - কংক্রীট</option>
+          <option value="0">0 - অন্যান্য</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>6. ছাদের উপাদান</label>
-        <select id="q6"><option>ঘাস/খড়/বাঁশ</option><option>প্লাস্টিক/পলিথিন</option><option>টালি/ইঁট</option><option>ধাতব শিট</option><option>কাঠ</option><option>পাথর</option><option>আরসিসি কনক্রিট</option></select>
+      <!-- 6. ছাদ -->
+      <div class="form-group"><label>6. ছাদের প্রধান উপাদান</label>
+        <select id="q6">
+          <option value="1">1 - ঘাস/খড়/বাঁশ/কাঠ/মাটি ইত্যাদি</option>
+          <option value="2">2 - প্লাস্টিক/পলিথিন</option>
+          <option value="3">3 - হাতে তৈরী টালি</option>
+          <option value="4">4 - মেশিনে তৈরী টালি</option>
+          <option value="5">5 - পোড়া ইট</option>
+          <option value="6">6 - পাথর</option>
+          <option value="7">7 - স্লেট পাথর</option>
+          <option value="8">8 - জি.আই./মেটাল/এসবেস্টস শীট</option>
+          <option value="9">9 - কংক্রীট</option>
+          <option value="0">0 - অন্যান্য</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>7. বাড়ি ব্যবহারের উদ্দেশ্য</label>
-        <select id="q7"><option>বসতবাড়ি</option><option>বসত ও অন্যান্য কাজ</option><option>দোকান/অফিস</option><option>কারখানা/ওয়ার্কশপ</option><option>পূজামণ্ডপ/উপাসনালয়</option><option>অন্যান্য</option><option>খালি বাড়ি</option></select>
+      <!-- 7. ব্যবহার -->
+      <div class="form-group"><label>7. সেন্সাস গৃহের প্রকৃত ব্যবহার</label>
+        <select id="q7">
+          <option value="1">1 - বাসগৃহ</option>
+          <option value="2">2 - বাসগৃহ-সহ অন্যান্য ব্যবহার</option>
+          <option value="3">3 - দোকান/অফিস</option>
+          <option value="4">4 - স্কুল/কলেজ ইত্যাদি</option>
+          <option value="5">5 - হোটেল/লজ/অতিথিশালা ইত্যাদি</option>
+          <option value="6">6 - হাসপাতাল/ঔষধালয় ইত্যাদি</option>
+          <option value="7">7 - কারখানা/কর্মশালা/ওয়ার্কশেড ইত্যাদি</option>
+          <option value="8">8 - ধর্মীয় কাজে ব্যবহৃত স্থান/ধর্মস্থান</option>
+          <option value="9">9 - বাসগৃহ ছাড়া অন্য ব্যবহার</option>
+          <option value="0">0 - খালি</option>
+        </select>
       </div>
 
       <div class="form-group"><label>8. বাড়ির অবস্থা</label>
-        <select id="q8"><option>ভালো (Good)</option><option>বসবাসযোগ্য (Livable)</option><option>জীর্ণ (Dilapidated)</option></select>
+        <select id="q8"><option value="1">1 - ভালো</option><option value="2">2 - বসবাসযোগ্য</option><option value="3">3 - জীর্ণ</option></select>
       </div>
 
       <div class="form-group"><label>9. পরিবার নম্বর</label><input type="number" id="q9" required></div>
@@ -82,72 +156,192 @@
       <div class="form-group"><label>11. পরিবার প্রধানের নাম</label><input type="text" id="q11" required></div>
       
       <div class="form-group"><label>12. প্রধানের লিঙ্গ</label>
-        <select id="q12"><option>পুরুষ</option><option>নারী</option><option>তৃতীয় লিঙ্গ</option></select>
+        <select id="q12"><option value="1">1 - পুরুষ</option><option value="2">2 - নারী</option><option value="3">3 - তৃতীয় লিঙ্গ</option></select>
       </div>
 
-      <div class="form-group"><label>13. সামাজিক শ্রেণী (SC/ST/OBC/Other)</label>
-        <select id="q13"><option>SC</option><option>ST</option><option>OBC</option><option>সাধারণ (General)</option></select>
+      <div class="form-group"><label>13. সামাজিক শ্রেণী</label>
+        <select id="q13"><option value="1">1 - SC</option><option value="2">2 - ST</option><option value="3">3 - অন্যান্য</option></select>
       </div>
 
       <div class="form-group"><label>14. ঘরের মালিকানার ধরন</label>
-        <select id="q14"><option>নিজের (Owned)</option><option>ভাড়া (Rented)</option><option>অন্যান্য</option></select>
+        <select id="q14"><option value="1">1 - নিজের বাড়ি</option><option value="2">2 - ভাড়া</option><option value="3">3 - অন্যান্য</option></select>
       </div>
 
       <div class="form-group"><label>15. থাকার ঘরের সংখ্যা</label><input type="number" id="q15" value="1"></div>
       <div class="form-group"><label>16. পরিবারে বিবাহিত দম্পতির সংখ্যা</label><input type="number" id="q16" value="1"></div>
 
+      <!-- 17. পানীয় জল -->
       <div class="form-group"><label>17. পানীয় জলের প্রধান উৎস</label>
-        <select id="q17"><option>কলের জল (Tap water)</option><option>টিউবওয়েল/হ্যান্ডপাম্প</option><option>কূয়া (Well)</option><option>নদী/খাল</option><option>অন্যান্য</option></select>
+        <select id="q17">
+          <option value="1">1 - পরিষ্কৃত কলের জল</option>
+          <option value="2">2 - অ-পরিষ্কৃত কলের জল</option>
+          <option value="3">3 - কুয়ো</option>
+          <option value="4">4 - হ্যান্ড পাম্প</option>
+          <option value="5">5 - টিউবওয়েল/বোরহোল</option>
+          <option value="6">6 - ঝরণার জল</option>
+          <option value="7">7 - নদী/খাল</option>
+          <option value="8">8 - জলাধার/পুকুর/হ্রদ</option>
+          <option value="9">9 - প্যাক করা/বোতলে কেনা জল</option>
+          <option value="0">0 - অন্যান্য উৎস</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>18. পানীয় জলের প্রাপ্যতা</label>
-        <select id="q18"><option>পরিসরের মধ্যে</option><option>পরিসরের কাছে</option><option>দূরে</option></select>
+      <div class="form-group"><label>18. জলের প্রাপ্যতা</label>
+        <select id="q18"><option value="1">1 - পরিসরের ভেতরে</option><option value="2">2 - পরিসরের কাছে</option><option value="3">3 - দূরে</option></select>
       </div>
 
       <div class="form-group"><label>19. আলোর প্রধান উৎস</label>
-        <select id="q19"><option>বিদ্যুৎ</option><option>কেরোসিন</option><option>সৌরবিদ্যুৎ</option><option>অন্যান্য</option><option>আলোর ব্যবস্থা নেই</option></select>
+        <select id="q19"><option value="1">1 - বিদ্যুৎ</option><option value="2">2 - কেরোসিন</option><option value="3">3 - সৌরবিদ্যুৎ</option><option value="0">0 - অন্যান্য</option></select>
       </div>
 
       <div class="form-group"><label>20. শৌচাগারের সুবিধা</label>
-        <select id="q20"><option>নিজস্ব শৌচাগার আছে</option><option>সুলভ/পাবলিক শৌচাগার</option><option>খোলা জায়গা</option></select>
+        <select id="q20"><option value="1">1 - শুধু নিজেদের ব্যবহারের</option><option value="2">2 - যৌথ ব্যবহার</option><option value="3">3 - প্রকাশ্য শৌচাগার</option></select>
       </div>
 
-      <div class="form-group"><label>21. শৌচাগারের ধরন</label>
-        <select id="q21"><option>ফ্লাশ/পায়খানা</option><option>পিট ল্যাট্রিন</option><option>প্রযোজ্য নয়</option></select>
+      <!-- 21. শৌচালয়ের ধরন -->
+      <div class="form-group"><label>21. শৌচালয়ের ধরন</label>
+        <select id="q21">
+          <option value="1">1 - ফ্লাশ/পোর-ফ্লাশ: নলবাহিত পয়ঃপ্রণালী</option>
+          <option value="2">2 - ফ্লাশ/পোর-ফ্লাশ: সেপটিক ট্যাঙ্ক</option>
+          <option value="3">3 - ফ্লাশ/পোর-ফ্লাশ: অন্যান্য পায়খানা</option>
+          <option value="4">4 - সূটি কুয়ো: ঢাকনা যুক্ত/জল হওয়া বেরোনোর উপযুক্ত ব্যবস্থা</option>
+          <option value="5">5 - সূটি কুয়ো: ঢাকনা বিহীন/খোলা কুয়ো পায়খানা</option>
+          <option value="6">6 - একটি কুয়ো: ঢাকনা যুক্ত/জল হওয়া বেরোনোর উপযুক্ত ব্যবস্থা</option>
+          <option value="7">7 - একটি কুয়ো: ঢাকনা বিহীন/খোলা কুয়ো পায়খানা</option>
+          <option value="8">8 - খাঁটি পায়খানা: মানুষের দ্বারা বাহিত মল</option>
+          <option value="9">9 - খাঁটি পায়খানা: পশুর দ্বারা বাহিত মল</option>
+          <option value="0">0 - খোলা নর্দমা দ্বারা মল নির্গমনের ব্যবস্থা</option>
+        </select>
+      </div>
+      <!-- 22. বর্জ্য জলের নিকাশী -->
+      <div class="form-group">
+        <label>22. বর্জ্য জলের নিকাশী কার সাথে যুক্ত :</label>
+        <select id="q22">
+          <option value="1">1 - ঢাকা নর্দমা</option>
+          <option value="2">2 - খোলা নর্দমা</option>
+          <option value="3">3 - কোন নর্দমা নেই</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>22. ড্রেনেজ/নিষ্কাশন ব্যবস্থা</label>
-        <select id="q22"><option>মে ঢাকা ড্রেন</option><option>খোলা ড্রেন</option><option>ড্রেন নেই</option></select>
+      <!-- 23. স্নানের ব্যবস্থা -->
+      <div class="form-group">
+        <label>23. বাড়ির চৌহদ্দীর মধ্যে স্নানের ব্যবস্থা আছে কি না :</label>
+        <select id="q23">
+          <option value="1">1 - হ্যাঁ: স্নানের ঘর আছে</option>
+          <option value="2">2 - স্নানের জন্য ছাদবিহীন ঘেরা জায়গা আছে</option>
+          <option value="3">3 - ব্যবস্থা নেই</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>23. স্নানের ঘর আছে কি?</label>
-        <select id="q23"><option>হ্যাঁ</option><option>না</option></select>
+      <!-- 24. রান্নাঘর ও এল.পি.জি. / পি.এন.জি. (রান্নার গ্যাস)-এর সংযোগ -->
+      <div class="form-group">
+        <label>24. রান্নাঘর ও এল.পি.জি. / পি.এন.জি. (রান্নার গ্যাস)-এর সংযোগ আছে কিনা :</label>
+        <select id="q24">
+          <option value="1">1 - রান্নাঘরেই রান্না হয়: এল.পি.জি./পি.এন.জি.-এর সংযোগ আছে</option>
+          <option value="2">2 - রান্নাঘরেই রান্না হয়: এল.পি.জি./পি.এন.জি.-এর সংযোগ নেই</option>
+          <option value="3">3 - বাড়ির মধ্যে রান্না হয়, কিন্তু রান্না ঘরে রান্না হয় না: এল.পি.জি./পি.এন.জি.-এর সংযোগ আছে</option>
+          <option value="4">4 - বাড়ির মধ্যে রান্না হয়, কিন্তু রান্না ঘরে রান্না হয় না: এল.পি.জি./পি.এন.জি.-এর সংযোগ নেই</option>
+          <option value="5">5 - খোলা জায়গায় রান্না/বাড়ির বাইরে রান্না হয়: এল.পি.জি./পি.এন.জি.-এর সংযোগ আছে</option>
+          <option value="6">6 - খোলা জায়গায় রান্না/বাড়ির বাইরে রান্না হয়: এল.পি.জি./পি.এন.জি.-এর সংযোগ নেই</option>
+          <option value="7">7 - রান্না হয় না</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>24. রান্নাঘর ও LPG সংযোগ</label>
-        <select id="q24"><option>রান্নাঘর ও LPG আছে</option><option>শুধুমাত্র রান্নাঘর আছে</option><option>LPG আছে রান্নাঘর নেই</option><option>কোনোটিই নেই</option></select>
+      <!-- 25. রান্নায় ব্যবহৃত প্রধান জ্বালানি -->
+      <div class="form-group">
+        <label>25. রান্নায় ব্যবহৃত প্রধান জ্বালানি :</label>
+        <select id="q25">
+          <option value="1">1 - জ্বালানি কাঠ</option>
+          <option value="2">2 - শস্যের পরিত্যক্ত অংশ</option>
+          <option value="3">3 - ঘুঁটে</option>
+          <option value="4">4 - কয়লা/লিগনাইট/কাঠ কয়লা</option>
+          <option value="5">5 - কেরোসিন</option>
+          <option value="6">6 - রান্নার গ্যাস (এল.পি.জি. / পি.এন.জি.)</option>
+          <option value="7">7 - বিদ্যুৎ</option>
+          <option value="8">8 - জৈব গ্যাস</option>
+          <option value="9">9 - সৌর শক্তি</option>
+          <option value="0">0 - অন্যান্য</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>25. রান্নার জ্বালানি</label>
-        <select id="q25"><option>LPG/PNG</option><option>কাঠ</option><option>গোবর ঘুঁটে</option><option>কেরোসিন</option><option>বিদ্যুৎ</option><option>অন্যান্য</option></select>
+      <!-- 26. রেডিও/ট্রানজিস্টর -->
+      <div class="form-group">
+        <label>26. রেডিও/ট্রানজিস্টর :</label>
+        <select id="q26">
+          <option value="1">1 - হ্যাঁ : সাধারণ রেডিও সেট</option>
+          <option value="2">2 - হ্যাঁ : মোবাইলে/স্মার্টফোনে</option>
+          <option value="3">3 - হ্যাঁ : অন্য কোনো যন্ত্রের মাধ্যমে</option>
+          <option value="4">4 - না</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>26. রেডিও/ট্রানজিস্টর আছে?</label><select id="q26"><option>হ্যাঁ</option><option>না</option></select></div>
-      <div class="form-group"><label>27. টেলিভিশন আছে?</label><select id="q27"><option>হ্যাঁ</option><option>না</option></select></div>
-      <div class="form-group"><label>28. ইন্টারনেট সংযোগ আছে?</label><select id="q28"><option>হ্যাঁ</option><option>না</option></select></div>
-      <div class="form-group"><label>29. কম্পিউটার/ল্যাপটপ আছে?</label><select id="q29"><option>হ্যাঁ</option><option>না</option></select></div>
-      <div class="form-group"><label>30. টেলিফোন/মোবাইল ফোন</label>
-        <select id="q30"><option>শুধুমাত্র স্মার্টফোন</option><option>শুধুমাত্র সাধারণ মোবাইল</option><option>ল্যান্ডলাইন ও মোবাইল</option><option>নেই</option></select>
+      <!-- 27. টেলিভিশন -->
+      <div class="form-group">
+        <label>27. টেলিভিশন :</label>
+        <select id="q27">
+          <option value="1">1 - হ্যাঁ : বিনামূল্যে দূরদর্শনের ডিশ অ্যান্টেনা</option>
+          <option value="2">2 - হ্যাঁ : অন্যান্য ডি.টি.এইচ./ডিশ</option>
+          <option value="3">3 - হ্যাঁ : কেবল্ সংযোগ</option>
+          <option value="4">4 - হ্যাঁ : অন্যান্য</option>
+          <option value="5">5 - না</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>31. বাইসাইকেল/বাইক/স্কুটার</label>
-        <select id="q31"><option>বাইসাইকেল</option><option>মোটরসাইকেল/স্কুটার</option><option>দুটোই আছে</option><option>নেই</option></select>
+      <!-- 28. ইন্টারনেটের উপলব্ধতা -->
+      <div class="form-group">
+        <label>28. ইন্টারনেটের উপলব্ধতা :</label>
+        <select id="q28">
+          <option value="1">1 - হ্যাঁ : ল্যাপটপ/কম্পিউটারে</option>
+          <option value="2">2 - হ্যাঁ : মোবাইল/স্মার্টফোনে</option>
+          <option value="3">3 - হ্যাঁ : অন্য কোনো যন্ত্রের মাধ্যমে</option>
+          <option value="4">4 - না</option>
+        </select>
       </div>
 
-      <div class="form-group"><label>32. চার চাকা গাড়ি/ভ্যান আছে?</label><select id="q32"><option>হ্যাঁ</option><option>না</option></select></div>
+      <!-- 29. ল্যাপটপ/কম্পিউটার -->
+      <div class="form-group">
+        <label>29. ল্যাপটপ/কম্পিউটার :</label>
+        <select id="q29">
+          <option value="1">1 - হ্যাঁ</option>
+          <option value="2">2 - না</option>
+        </select>
+      </div>
+      <!-- 30. টেলিফোন এবং মোবাইল ফোন/স্মার্টফোন -->
+      <div class="form-group">
+        <label>30. টেলিফোন এবং মোবাইল ফোন/স্মার্টফোন :</label>
+        <select id="q30">
+          <option value="1">1 - হ্যাঁ : শুধুমাত্র ল্যান্ডলাইন</option>
+          <option value="2">2 - হ্যাঁ : শুধুমাত্র স্মার্টফোন</option>
+          <option value="3">3 - হ্যাঁ : অন্যান্য সাধারণ মোবাইল ফোন</option>
+          <option value="4">4 - হ্যাঁ : উভয়ই</option>
+          <option value="5">5 - না</option>
+        </select>
+      </div>
 
-      <div class="form-group"><label>33. পরিবারের প্রধান খাদ্যশস্য</label>
-        <select id="q33"><option>চাল (ভাত)</option><option>গম (আটা)</option><option>অন্যান্য</option></select>
+      <!-- 31. সাইকেল এবং স্কুটার/মোটর সাইকেল/মোপেড -->
+      <div class="form-group">
+        <label>31. সাইকেল এবং স্কুটার/মোটর সাইকেল/মোপেড :</label>
+        <select id="q31">
+          <option value="1">1 - সাইকেল</option>
+          <option value="2">2 - স্কুটার/মোটর সাইকেল/মোপেড</option>
+          <option value="3">3 - দুটোই আছে</option>
+          <option value="4">4 - কোনোটাই নেই</option>
+        </select>
+      </div>
+
+      <div class="form-group"><label>32. চার চাকা গাড়ি/ভ্যান আছে?</label><select id="q32"><option>1.হ্যাঁ</option><option>2.না</option></select></div>
+
+      <!-- 33. প্রধান খাদ্যশস্য -->
+      <div class="form-group">
+        <label>33. পরিবারটি প্রধানত কোন খাদ্যশস্য গ্রহণ করে :</label>
+        <select id="q33">
+          <option value="1">1 - ধানজাত</option>
+          <option value="2">2 - গমজাত</option>
+          <option value="3">3 - জোয়ারজাত</option>
+          <option value="4">4 - বাজরাজাত</option>
+          <option value="5">5 - ভূট্টাজাত</option>
+          <option value="6">6 - অন্যান্য</option>
+        </select>
       </div>
 
       <div class="form-group"><label>34. মোবাইল নম্বর</label><input type="text" id="q34" required maxlength="10"></div>
