@@ -1,307 +1,385 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জনগণনা গৃহতালিকা ফর্ম (৩৪ প্রশ্ন)</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef2f5; margin: 0; padding: 15px; }
-        .container { max-width: 1350px; margin: auto; display: flex; flex-wrap: wrap; gap: 20px; }
-        .form-box { flex: 1.3; min-width: 360px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .table-box { flex: 1.7; min-width: 360px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2, h3 { color: #ff6f00; margin-top: 0; border-bottom: 2px solid #ff6f00; padding-bottom: 5px; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-        .form-group { margin-bottom: 6px; }
-        label { font-weight: bold; font-size: 11px; display: block; margin-bottom: 2px; color: #333; }
-        input, select { width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
-        .btn { background: #ff6f00; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 15px; }
-        .btn-print { background: #28a745; display: none; margin-top: 10px; }
-        .search-box { width: 100%; padding: 8px; border: 2px solid #ff6f00; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box; font-size: 13px; }
-        .tbl-container { max-height: 550px; overflow-x: auto; overflow-y: auto; border: 1px solid #ddd; }
-        table { width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; }
-        th, td { padding: 6px 8px; border-bottom: 1px solid #ddd; white-space: nowrap; }
-        th { background: #ff6f00; color: white; position: sticky; top: 0; }
-
-        @media print {
-            .table-box, .btn, .search-box { display: none !important; }
-            .form-box { width: 100%; border: none; box-shadow: none; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>জনগণনা গৃহতালিকা ও গৃহ গণনা ফর্ম</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+    .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 12px; border: none; background: #e0e0e0; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; }
+    .tab-btn.active { background: #3498db; color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .form-group { margin-bottom: 15px; background: #f9f9f9; padding: 12px; border-radius: 5px; border-left: 4px solid #3498db; }
+    label { font-weight: bold; display: block; margin-bottom: 6px; }
+    select, input[type="text"], input[type="number"], textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 15px; }
+    .btn-submit { width: 100%; padding: 14px; background-color: #2ecc71; color: white; border: none; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+    .btn-submit:hover { background-color: #27ae60; }
+    .search-box { margin-bottom: 15px; display: flex; gap: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #3498db; color: white; }
+    .action-btn { padding: 4px 8px; border: none; border-radius: 3px; cursor: pointer; font-size: 12px; margin-right: 3px; }
+    .edit-btn { background: #f39c12; color: white; }
+    .delete-btn { background: #e74c3c; color: white; }
+    @media print { body * { visibility: hidden; } #print-area, #print-area * { visibility: visible; } #print-area { position: absolute; left: 0; top: 0; width: 100%; } }
+  </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- ফর্ম সেকশন -->
-    <div class="form-box">
-        <h2>গৃহতালিকা ও সুবিধা সংক্রান্ত প্রশ্নাবলী</h2>
-        <form id="censusForm">
-            <div class="form-grid">
-                <div class="form-group"><label>১. লাইন নম্বর</label><input type="text" id="c1" required></div>
-                <div class="form-group"><label>২. বিল্ডিং নম্বর</label><input type="text" id="c2" required></div>
-                <div class="form-group"><label>৩. জনগণনা বাড়ি নম্বর</label><input type="text" id="c3" required></div>
-                
-                <div class="form-group">
-                    <label>৪. মেঝে তৈরির উপাদান</label>
-                    <select id="c4">
-                        <option value="1-মাটি">১-মাটি</option><option value="2-কাঠ/বাঁশ">২-কাঠ/বাঁশ</option><option value="3-পোড়া ইট">৩-পোড়া ইট</option>
-                        <option value="4-পাথর">৪-পাথর</option><option value="5-সিমেন্ট">৫-সিমেন্ট</option><option value="6-মোসাইক/টাইলস">৬-মোসাইক/টাইলস</option><option value="7-অন্যান্য">৭-অন্যান্য</option>
-                    </select>
-                </div>
+  <h2>জনগণনা গৃহতালিকা ও গৃহ গণনা সূচি</h2>
+  
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('form-tab')">ফর্ম ফিলাপ</button>
+    <button class="tab-btn" onclick="switchTab('data-tab'); loadData();">ডাটা তালিকা ও সার্চ</button>
+  </div>
 
-                <div class="form-group">
-                    <label>৫. দেওয়ালের উপাদান</label>
-                    <select id="c5">
-                        <option value="1-ঘাস/খড়/বাঁশ">১-ঘাস/খড়/বাঁশ</option><option value="2-প্লাস্টিক">২-প্লাস্টিক</option><option value="3-কাঁচা ইট/মাটি">৩-কাঁচা ইট/মাটি</option>
-                        <option value="4-কাঠ">৪-কাঠ</option><option value="5-গাঁথুনি ছাড়া পাথর">৫-গাঁথুনি ছাড়া পাথর</option><option value="6-গাঁথুনিসহ পাথর">৬-গাঁথুনিসহ পাথর</option>
-                        <option value="7-টিন/অ্যাসবেস্টস">৭-টিন/অ্যাসবেস্টস</option><option value="8-পোড়া ইট">৮-পোড়া ইট</option><option value="9-কনক্রিট">৯-কনক্রিট</option><option value="0-অন্যান্য">০-অন্যান্য</option>
-                    </select>
-                </div>
+  <!-- Tab 1: Form -->
+  <div id="form-tab" class="tab-content active">
+    <form id="censusForm">
+      <input type="hidden" id="edit_record_id" value="">
 
-                <div class="form-group">
-                    <label>৬. ছাদের উপাদান</label>
-                    <select id="c6">
-                        <option value="1-ঘাস/খড়/মাটি">১-ঘাস/খড়/মাটি</option><option value="2-প্লাস্টিক">২-প্লাস্টিক</option><option value="3-হাতে তৈরি টাইলস">৩-হাতে তৈরি টাইলস</option>
-                        <option value="4-মেশিনে তৈরি টাইলস">৪-মেশিনে তৈরি টাইলস</option><option value="5-পোড়া ইট">৫-পোড়া ইট</option><option value="6-পাথর">৬-পাথর</option>
-                        <option value="7-স্লেট">৭-স্লেট</option><option value="8-টিন/অ্যাসবেস্টস">৮-টিন/অ্যাসবেস্টস</option><option value="9-কনক্রিট">৯-কনক্রিট</option><option value="0-অন্যান্য">০-অন্যান্য</option>
-                    </select>
-                </div>
+      <!-- User ID Select -->
+      <div class="form-group" style="border-left-color: #e74c3c; background: #fdf2e9;">
+        <label>কোলেক্টর / User ID বাছাই করুন *</label>
+        <select id="user_id" required>
+          <option value="">-- নির্বাচন করুন --</option>
+          <option value="User 1">User 1</option>
+          <option value="User 2">User 2</option>
+        </select>
+      </div>
 
-                <div class="form-group">
-                    <label>৭. ব্যবহারের উদ্দেশ্য</label>
-                    <select id="c7">
-                        <option value="1-বসতবাড়ি">১-বসতবাড়ি</option><option value="2-বসতবাড়ি ও অন্যান্য">২-বসতবাড়ি ও অন্যান্য</option><option value="3-দোকান/অফিস">৩-দোকান/অফিস</option>
-                        <option value="4-স্কুল/কলেজ">৪-স্কুল/কলেজ</option><option value="5-হোটেল/লজ">৫-হোটেল/লজ</option><option value="6-হাসপাতাল">৬-হাসপাতাল</option>
-                        <option value="7-কারখানা">৭-কারখানা</option><option value="8-উপাসনালয়">৮-উপাসনালয়</option><option value="9-অন্যান্য">৯-অন্যান্য</option><option value="0-ফাঁকা">০-ফাঁকা</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>1. লাইন নম্বর</label><input type="number" id="q1" required></div>
+      <div class="form-group"><label>2. বিল্ডিং নম্বর (আঞ্চলিক)</label><input type="text" id="q2" required></div>
+      <div class="form-group"><label>3. জনগণনা বাড়ি নম্বর</label><input type="text" id="q3" required></div>
+      
+      <div class="form-group"><label>4. মেঝে তৈরির উপাদান</label>
+        <select id="q4"><option>কাদামাটি</option><option>বাঁশ/কাঠ</option><option>ইঁট</option><option>পাথর</option><option>সিমেন্ট</option><option>মোসাইক/টাইলস</option><option>অন্যান্য</option></select>
+      </div>
+      
+      <div class="form-group"><label>5. দেওয়ালের উপাদান</label>
+        <select id="q5"><option>ঘাস/বাঁশ/নল</option><option>প্লাস্টিক/পলিথিন</option><option>কাঁচা ইঁট/কাদা</option><option>কাঠ</option><option>পাথর</option><option>পাকা ইঁট</option><option>জিআই/ধাতব শিট</option><option>কনক্রিট</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>৮. বাড়ির অবস্থা</label>
-                    <select id="c8">
-                        <option value="1-ভালো">১-ভালো</option><option value="2-বসবাসযোগ্য">২-বসবাসযোগ্য</option><option value="3-জীর্ণ/জরাজীর্ণ">৩-জীর্ণ/জরাজীর্ণ</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>6. ছাদের উপাদান</label>
+        <select id="q6"><option>ঘাস/খড়/বাঁশ</option><option>প্লাস্টিক/পলিথিন</option><option>টালি/ইঁট</option><option>ধাতব শিট</option><option>কাঠ</option><option>পাথর</option><option>আরসিসি কনক্রিট</option></select>
+      </div>
 
-                <div class="form-group"><label>৯. পরিবার নম্বর</label><input type="text" id="c9"></div>
-                <div class="form-group"><label>১০. মোট সদস্য সংখ্যা</label><input type="number" id="c10"></div>
-                <div class="form-group"><label>১১. পরিবার প্রধানের নাম</label><input type="text" id="c11" required></div>
-                
-                <div class="form-group">
-                    <label>১২. প্রধানের লিঙ্গ</label>
-                    <select id="c12">
-                        <option value="1-পুরুষ">১-পুরুষ</option><option value="2-মহিলা">২-মহিলা</option><option value="3-তৃতীয় লিঙ্গ">৩-তৃতীয় লিঙ্গ</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>7. বাড়ি ব্যবহারের উদ্দেশ্য</label>
+        <select id="q7"><option>বসতবাড়ি</option><option>বসত ও অন্যান্য কাজ</option><option>দোকান/অফিস</option><option>কারখানা/ওয়ার্কশপ</option><option>পূজামণ্ডপ/উপাসনালয়</option><option>অন্যান্য</option><option>খালি বাড়ি</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>১৩. সামাজিক শ্রেণী</label>
-                    <select id="c13">
-                        <option value="1-SC">১-SC</option><option value="2-ST">২-ST</option><option value="3-অন্যান্য">৩-অন্যান্য</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>8. বাড়ির অবস্থা</label>
+        <select id="q8"><option>ভালো (Good)</option><option>বসবাসযোগ্য (Livable)</option><option>জীর্ণ (Dilapidated)</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>১৪. মালিকানার ধরন</label>
-                    <select id="c14">
-                        <option value="1-নিজের বাড়ি">১-নিজের বাড়ি</option><option value="2-ভাড়া(অন্যত্র আছে)">২-ভাড়া (অন্যত্র বাড়ি আছে)</option>
-                        <option value="3-ভাড়া(অন্যত্র নেই)">৩-ভাড়া (অন্যত্র বাড়ি নেই)</option><option value="4-অন্যান্য">৪-অন্যান্য</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>9. পরিবার নম্বর</label><input type="number" id="q9" required></div>
+      <div class="form-group"><label>10. পরিবারে মোট সদস্য সংখ্যা</label><input type="number" id="q10" required></div>
+      <div class="form-group"><label>11. পরিবার প্রধানের নাম</label><input type="text" id="q11" required></div>
+      
+      <div class="form-group"><label>12. প্রধানের লিঙ্গ</label>
+        <select id="q12"><option>পুরুষ</option><option>নারী</option><option>তৃতীয় লিঙ্গ</option></select>
+      </div>
 
-                <div class="form-group"><label>১৫. থাকার ঘরের সংখ্যা</label><input type="number" id="c15"></div>
-                <div class="form-group"><label>১৬. বিবাহিত দম্পতি</label><input type="number" id="c16"></div>
+      <div class="form-group"><label>13. সামাজিক শ্রেণী (SC/ST/OBC/Other)</label>
+        <select id="q13"><option>SC</option><option>ST</option><option>OBC</option><option>সাধারণ (General)</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>১৭. পানীয় জলের উৎস</label>
-                    <select id="c17">
-                        <option value="1-পরিশোধিত কল">১-পরিশোধিত কল</option><option value="2-অপরিশোধিত কল">২-অপরিশোধিত কল</option><option value="3-কুয়ো">৩-কুয়ো</option>
-                        <option value="4-হ্যান্ড পাম্প">৪-হ্যান্ড পাম্প</option><option value="5-টিউবওয়েল">৫-টিউবওয়েল</option><option value="6-ঝরনা">৬-ঝরনা</option>
-                        <option value="7-নদী/খাল">৭-নদী/খাল</option><option value="8-পুকুর">৮-পুকুর</option><option value="9-বোতলজাত জল">৯-বোতলজাত জল</option><option value="0-অন্যান্য">০-অন্যান্য</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>14. ঘরের মালিকানার ধরন</label>
+        <select id="q14"><option>নিজের (Owned)</option><option>ভাড়া (Rented)</option><option>অন্যান্য</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>১৮. জলের প্রাপ্যতা</label>
-                    <select id="c18">
-                        <option value="1-পরিসরের ভেতরে">১-পরিসরের ভেতরে</option><option value="2-পরিসরের কাছাকাছি">২-পরিসরের কাছাকাছি</option><option value="3-দূরে">৩-দূরে</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>15. থাকার ঘরের সংখ্যা</label><input type="number" id="q15" value="1"></div>
+      <div class="form-group"><label>16. পরিবারে বিবাহিত দম্পতির সংখ্যা</label><input type="number" id="q16" value="1"></div>
 
-                <div class="form-group">
-                    <label>১৯. আলোর উৎস</label>
-                    <select id="c19">
-                        <option value="1-বিদ্যুৎ">১-বিদ্যুৎ</option><option value="2-কেরোসিন">২-কেরোসিন</option><option value="3-সৌরশক্তি">৩-সৌরশক্তি</option>
-                        <option value="4-অন্যান্য তেল">৪-অন্যান্য তেল</option><option value="5-অন্যান্য">৫-অন্যান্য</option><option value="6-আলোর ব্যবস্থা নেই">৬-আলোর ব্যবস্থা নেই</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>17. পানীয় জলের প্রধান উৎস</label>
+        <select id="q17"><option>কলের জল (Tap water)</option><option>টিউবওয়েল/হ্যান্ডপাম্প</option><option>কূয়া (Well)</option><option>নদী/খাল</option><option>অন্যান্য</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>২০. শৌচাগারের সুবিধা</label>
-                    <select id="c20">
-                        <option value="1-নিজেরা ব্যবহার">১-শুধু নিজেদের ব্যবহারের জন্য</option><option value="2-যৌথ ব্যবহার">২-যৌথ ব্যবহার</option>
-                        <option value="3-পাবলিক শৌচাগার">৩-পাবলিক শৌচাগার</option><option value="4-শৌচাগার নেই">৪-শৌচাগার নেই</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>18. পানীয় জলের প্রাপ্যতা</label>
+        <select id="q18"><option>পরিসরের মধ্যে</option><option>পরিসরের কাছে</option><option>দূরে</option></select>
+      </div>
 
-                <div class="form-group"><label>২১. শৌচাগারের ধরন</label><input type="text" id="c21" placeholder="ফ্ল্যাশ/ড্রেন/পিট"></div>
-                
-                <div class="form-group">
-                    <label>২২. নিষ্কাশন ব্যবস্থা</label>
-                    <select id="c22">
-                        <option value="1-ঢাকা ড্রেন">১-ঢাকা ড্রেন</option><option value="2-খোলা ড্রেন">২-খোলা ড্রেন</option><option value="3-ড্রেন নেই">৩-ড্রেন নেই</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>19. আলোর প্রধান উৎস</label>
+        <select id="q19"><option>বিদ্যুৎ</option><option>কেরোসিন</option><option>সৌরবিদ্যুৎ</option><option>অন্যান্য</option><option>আলোর ব্যবস্থা নেই</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>২৩. স্নানের সুবিধা</label>
-                    <select id="c23">
-                        <option value="1-হ্যাঁ(বাথরুম)">১-হ্যাঁ (বাথরুম আছে)</option><option value="2-ঘেরা জায়গা">২-ছাদ ছাড়া ঘেরা জায়গা</option><option value="3-সুবিধা নেই">৩-স্নানের সুবিধা নেই</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>20. শৌচাগারের সুবিধা</label>
+        <select id="q20"><option>নিজস্ব শৌচাগার আছে</option><option>সুলভ/পাবলিক শৌচাগার</option><option>খোলা জায়গা</option></select>
+      </div>
 
-                <div class="form-group"><label>২৪. রান্নাঘর ও LPG</label><input type="text" id="c24" placeholder="রান্নাঘর ও গ্যাস কানেকশন"></div>
+      <div class="form-group"><label>21. শৌচাগারের ধরন</label>
+        <select id="q21"><option>ফ্লাশ/পায়খানা</option><option>পিট ল্যাট্রিন</option><option>প্রযোজ্য নয়</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>২৫. রান্নার জ্বালানি</label>
-                    <select id="c25">
-                        <option value="1-কাঠ">১-কাঠ</option><option value="2-খড়">২-খড়</option><option value="3-ঘুঁটে">৩-ঘুঁটে</option>
-                        <option value="4-কয়লা">৪-কয়লা</option><option value="5-কেরোসিন">৫-কেরোসিন</option><option value="6-LPG/PNG">৬-এলপিজি/পিএনজি</option>
-                        <option value="7-বিদ্যুৎ">৭-বিদ্যুৎ</option><option value="8-বায়োগ্যাস">৮-বায়োগ্যাস</option><option value="9-সৌরশক্তি">৯-সৌরশক্তি</option><option value="0-অন্যান্য">০-অন্যান্য</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>22. ড্রেনেজ/নিষ্কাশন ব্যবস্থা</label>
+        <select id="q22"><option>মে ঢাকা ড্রেন</option><option>খোলা ড্রেন</option><option>ড্রেন নেই</option></select>
+      </div>
 
-                <div class="form-group"><label>২৬. রেডিও/ট্রানজিস্টর</label><input type="text" id="c26"></div>
+      <div class="form-group"><label>23. স্নানের ঘর আছে কি?</label>
+        <select id="q23"><option>হ্যাঁ</option><option>না</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>২৭. টেলিভিশন</label>
-                    <select id="c27">
-                        <option value="1-দূরদর্শন ডিশ">১-দূরদর্শন ফ্রি ডিশ</option><option value="2-অন্যান্য DTH">২-অন্যান্য ডিটিএইচ</option>
-                        <option value="3-কেবুল সংযোগ">৩-কেবুল সংযোগ</option><option value="4-অন্যান্য">৪-অন্যান্য</option><option value="5-নেই">৫-নেই</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>24. রান্নাঘর ও LPG সংযোগ</label>
+        <select id="q24"><option>রান্নাঘর ও LPG আছে</option><option>শুধুমাত্র রান্নাঘর আছে</option><option>LPG আছে রান্নাঘর নেই</option><option>কোনোটিই নেই</option></select>
+      </div>
 
-                <div class="form-group"><label>২৮. ইন্টারনেট সুবিধা</label><input type="text" id="c28" placeholder="হ্যাঁ / না"></div>
-                <div class="form-group"><label>২৯. কম্পিউটার/ল্যাপটপ</label><select id="c29"><option value="1-হ্যাঁ">১-হ্যাঁ</option><option value="2-না">২-না</option></select></div>
-                
-                <div class="form-group">
-                    <label>৩০. টেলিফোন/মোবাইল</label>
-                    <select id="c30">
-                        <option value="1-ল্যান্ডলাইন">১-ল্যান্ডলাইন</option><option value="2-স্মার্টফোন">২-স্মার্টফোন</option>
-                        <option value="3-সাধারণ মোবাইল">৩-সাধারণ মোবাইল</option><option value="4-উভয়ই">৪-উভয়ই</option><option value="5-কোনোটিই নয়">৫-কোনোটিই নয়</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>25. রান্নার জ্বালানি</label>
+        <select id="q25"><option>LPG/PNG</option><option>কাঠ</option><option>গোবর ঘুঁটে</option><option>কেরোসিন</option><option>বিদ্যুৎ</option><option>অন্যান্য</option></select>
+      </div>
 
-                <div class="form-group"><label>৩১. বাইসাইকেল/বাইক</label><input type="text" id="c31" placeholder="হ্যাঁ / না"></div>
-                <div class="form-group"><label>৩২. গাড়ি/জিপ/ভ্যান</label><select id="c32"><option value="1-হ্যাঁ">১-হ্যাঁ</option><option value="2-না">২-না</option></select></div>
+      <div class="form-group"><label>26. রেডিও/ট্রানজিস্টর আছে?</label><select id="q26"><option>হ্যাঁ</option><option>না</option></select></div>
+      <div class="form-group"><label>27. টেলিভিশন আছে?</label><select id="q27"><option>হ্যাঁ</option><option>না</option></select></div>
+      <div class="form-group"><label>28. ইন্টারনেট সংযোগ আছে?</label><select id="q28"><option>হ্যাঁ</option><option>না</option></select></div>
+      <div class="form-group"><label>29. কম্পিউটার/ল্যাপটপ আছে?</label><select id="q29"><option>হ্যাঁ</option><option>না</option></select></div>
+      <div class="form-group"><label>30. টেলিফোন/মোবাইল ফোন</label>
+        <select id="q30"><option>শুধুমাত্র স্মার্টফোন</option><option>শুধুমাত্র সাধারণ মোবাইল</option><option>ল্যান্ডলাইন ও মোবাইল</option><option>নেই</option></select>
+      </div>
 
-                <div class="form-group">
-                    <label>৩৩. প্রধান খাদ্যশস্য</label>
-                    <select id="c33">
-                        <option value="1-চাল">১-চাল</option><option value="2-গম">২-গম</option><option value="3-জোয়ার">৩-জোয়ার</option>
-                        <option value="4-বাজরা">৪-বাজরা</option><option value="5-ভুট্টা">৫-ভুট্টা</option><option value="6-অন্যান্য">৬-অন্যান্য</option>
-                    </select>
-                </div>
+      <div class="form-group"><label>31. বাইসাইকেল/বাইক/স্কুটার</label>
+        <select id="q31"><option>বাইসাইকেল</option><option>মোটরসাইকেল/স্কুটার</option><option>দুটোই আছে</option><option>নেই</option></select>
+      </div>
 
-                <div class="form-group"><label>৩৪. মোবাইল নম্বর</label><input type="tel" id="c34" required></div>
-            </div>
+      <div class="form-group"><label>32. চার চাকা গাড়ি/ভ্যান আছে?</label><select id="q32"><option>হ্যাঁ</option><option>না</option></select></div>
 
-            <button type="submit" id="submitBtn" class="btn">সেভ করুন (Google Sheet)</button>
-        </form>
-        <button id="printBtn" onclick="window.print()" class="btn btn-print">PDF ডাউনলোড / প্রিন্ট</button>
+      <div class="form-group"><label>33. পরিবারের প্রধান খাদ্যশস্য</label>
+        <select id="q33"><option>চাল (ভাত)</option><option>গম (আটা)</option><option>অন্যান্য</option></select>
+      </div>
+
+      <div class="form-group"><label>34. মোবাইল নম্বর</label><input type="text" id="q34" required maxlength="10"></div>
+      
+      <!-- Remarks Field -->
+      <div class="form-group" style="border-left-color: #8e44ad;">
+        <label>Remarks / মন্তব্য (যদি থাকে)</label>
+        <textarea id="remarks" rows="2" placeholder="এখানে কোনো বিশেষ মন্তব্য লিখুন..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">তথ্য জমা দিন (Save Data)</button>
+    </form>
+  </div>
+
+  <!-- Tab 2: Data & Search -->
+  <div id="data-tab" class="tab-content">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="প্রধানের নাম, ফোন নম্বর বা গৃহ নং দিয়ে খুঁজুন..." onkeyup="filterTable()">
+      <button onclick="window.print()" style="padding:10px; background:#8e44ad; color:white; border:none; border-radius:4px; cursor:pointer;">প্রিন্ট করুন</button>
     </div>
 
-    <!-- ডাটা লিস্ট সেকশন -->
-    <div class="table-box">
-        <h3>সংগৃহীত ডাটা ও লাইভ সার্চ</h3>
-        <input type="text" id="searchInput" class="search-box" onkeyup="searchData()" placeholder="নাম, বাড়ি নং বা মোবাইল দিয়ে খুঁজুন...">
-        <div class="tbl-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>লাইন</th><th>বিল্ডিং</th><th>প্রধানের নাম</th><th>সদস্য</th><th>মোবাইল</th><th>জ্বালানি</th>
-                    </tr>
-                </thead>
-                <tbody id="tblBody">
-                    <tr><td colspan="6">ডাটা লোড হচ্ছে...</td></tr>
-                </tbody>
-            </table>
-        </div>
+    <div id="print-area" style="overflow-x:auto;">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>লাইন</th>
+            <th>বাড়ি নং</th>
+            <th>প্রধানের নাম</th>
+            <th>সদস্য</th>
+            <th>মোবাইল</th>
+            <th>Remarks</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Data populated via JS -->
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyD4LceDBGM2Gu8IKn57q0OWR09W67-vQCnEC5eaio9v3XnBsYhzJRU1wqmHkp_N8Q/exec';
-    let rawData = [];
+  // Google Apps Script Web App URL 
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxeHfcbEPx53NajCqr1JuyHCuSgRK5Phkh5Lgg4k7DKnXy5EI6-XVkiRwJSrSzmdb6/exec';
+  let globalData = [];
 
-    window.onload = fetchRecords;
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
 
-    async function fetchRecords() {
-        try {
-            const res = await fetch(SCRIPT_URL);
-            rawData = await res.json();
-            renderTable(rawData.reverse());
-        } catch (err) {
-            console.error(err);
-        }
-    }
+  document.getElementById('censusForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "জমা হচ্ছে...";
 
-    function renderTable(data) {
-        const tbody = document.getElementById('tblBody');
-        tbody.innerHTML = '';
-        if(data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6">কোনো তথ্য পাওয়া যায়নি</td></tr>';
-            return;
-        }
-        data.forEach(row => {
-            tbody.innerHTML += `<tr>
-                <td>${row[0] || ''}</td>
-                <td>${row[1] || ''}</td>
-                <td><b>${row[10] || ''}</b></td>
-                <td>${row[9] || ''}</td>
-                <td>${row[33] || ''}</td>
-                <td>${row[24] || ''}</td>
-            </tr>`;
-        });
-    }
+    const editId = document.getElementById('edit_record_id').value;
+    const recordId = editId ? editId : 'ID_' + Date.now();
 
-    function searchData() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        const filtered = rawData.filter(row => 
-            String(row[10]).toLowerCase().includes(query) || 
-            String(row[1]).toLowerCase().includes(query) ||
-            String(row[33]).includes(query)
-        );
-        renderTable(filtered);
-    }
+    const rowValues = [
+      recordId,
+      document.getElementById('user_id').value,
+      document.getElementById('q1').value,
+      document.getElementById('q2').value,
+      document.getElementById('q3').value,
+      document.getElementById('q4').value,
+      document.getElementById('q5').value,
+      document.getElementById('q6').value,
+      document.getElementById('q7').value,
+      document.getElementById('q8').value,
+      document.getElementById('q9').value,
+      document.getElementById('q10').value,
+      document.getElementById('q11').value,
+      document.getElementById('q12').value,
+      document.getElementById('q13').value,
+      document.getElementById('q14').value,
+      document.getElementById('q15').value,
+      document.getElementById('q16').value,
+      document.getElementById('q17').value,
+      document.getElementById('q18').value,
+      document.getElementById('q19').value,
+      document.getElementById('q20').value,
+      document.getElementById('q21').value,
+      document.getElementById('q22').value,
+      document.getElementById('q23').value,
+      document.getElementById('q24').value,
+      document.getElementById('q25').value,
+      document.getElementById('q26').value,
+      document.getElementById('q27').value,
+      document.getElementById('q28').value,
+      document.getElementById('q29').value,
+      document.getElementById('q30').value,
+      document.getElementById('q31').value,
+      document.getElementById('q32').value,
+      document.getElementById('q33').value,
+      document.getElementById('q34').value,
+      document.getElementById('remarks').value
+    ];
 
-    document.getElementById('censusForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.innerText = 'ডাটা সেভ হচ্ছে...';
+    const payload = {
+      action: editId ? "update" : "create",
+      id: recordId,
+      rowValues: rowValues
+    };
 
-        let rowValues = [];
-        for(let i=1; i<=34; i++) {
-            rowValues.push(document.getElementById('c' + i).value);
-        }
-
-        try {
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ rowValues: rowValues })
-            });
-
-            alert('৩৪টি বাংলা তথ্যের বিবরণ সফলভাবে Google Sheet-এ সেভ হয়েছে!');
-            document.getElementById('printBtn').style.display = 'block';
-            submitBtn.innerText = 'সেভ করুন (Google Sheet)';
-            setTimeout(fetchRecords, 1500);
-        } catch (error) {
-            alert('সমস্যা হয়েছে: ' + error.message);
-            submitBtn.innerText = 'সেভ করুন (Google Sheet)';
-        }
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert(editId ? 'তথ্য সফলভাবে আপডেট করা হয়েছে!' : 'তথ্য সফলভাবে জমা হয়েছে!');
+      document.getElementById('censusForm').reset();
+      document.getElementById('edit_record_id').value = '';
+      btn.disabled = false;
+      btn.innerText = "তথ্য জমা দিন (Save Data)";
+    })
+    .catch(err => {
+      alert('ত্রুটি হয়েছে, আবার চেষ্টা করুন!');
+      btn.disabled = false;
+      btn.innerText = "তথ্য জমা দিন (Save Data)";
     });
-</script>
+  });
 
+  function loadData() {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '<tr><td colspan="8">ডাটা লোড হচ্ছে...</td></tr>';
+    
+    fetch(SCRIPT_URL)
+    .then(res => res.json())
+    .then(data => {
+      globalData = data;
+      renderTable(data);
+    });
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    data.forEach((row) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row[1] || ''}</td>
+        <td>${row[2] || ''}</td>
+        <td>${row[4] || ''}</td>
+        <td>${row[12] || ''}</td>
+        <td>${row[11] || ''}</td>
+        <td>${row[35] || ''}</td>
+        <td>${row[36] || ''}</td>
+        <td>
+          <button class="action-btn edit-btn" onclick="editRow('${row[0]}')">Edit</button>
+          <button class="action-btn delete-btn" onclick="deleteRow('${row[0]}')">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function editRow(id) {
+    const row = globalData.find(r => r[0] == id);
+    if (!row) return;
+
+    switchTab('form-tab');
+    document.getElementById('edit_record_id').value = row[0];
+    document.getElementById('user_id').value = row[1];
+    document.getElementById('q1').value = row[2];
+    document.getElementById('q2').value = row[3];
+    document.getElementById('q3').value = row[4];
+    document.getElementById('q4').value = row[5];
+    document.getElementById('q5').value = row[6];
+    document.getElementById('q6').value = row[7];
+    document.getElementById('q7').value = row[8];
+    document.getElementById('q8').value = row[9];
+    document.getElementById('q9').value = row[10];
+    document.getElementById('q10').value = row[11];
+    document.getElementById('q11').value = row[12];
+    document.getElementById('q12').value = row[13];
+    document.getElementById('q13').value = row[14];
+    document.getElementById('q14').value = row[15];
+    document.getElementById('q15').value = row[16];
+    document.getElementById('q16').value = row[17];
+    document.getElementById('q17').value = row[18];
+    document.getElementById('q18').value = row[19];
+    document.getElementById('q19').value = row[20];
+    document.getElementById('q20').value = row[21];
+    document.getElementById('q21').value = row[22];
+    document.getElementById('q22').value = row[23];
+    document.getElementById('q23').value = row[24];
+    document.getElementById('q24').value = row[25];
+    document.getElementById('q25').value = row[26];
+    document.getElementById('q26').value = row[27];
+    document.getElementById('q27').value = row[28];
+    document.getElementById('q28').value = row[29];
+    document.getElementById('q29').value = row[30];
+    document.getElementById('q30').value = row[31];
+    document.getElementById('q31').value = row[32];
+    document.getElementById('q32').value = row[33];
+    document.getElementById('q33').value = row[34];
+    document.getElementById('q34').value = row[35];
+    document.getElementById('remarks').value = row[36] || '';
+
+    document.getElementById('submitBtn').innerText = "আপডেট করুন (Update Data)";
+  }
+
+  function deleteRow(id) {
+    if (!confirm('আপনি কি এই তথ্যটি স্থায়ীভাবে মুছে ফেলতে চান?')) return;
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: "delete", id: id })
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert('তথ্য সফলভাবে মুছে ফেলা হয়েছে!');
+      loadData();
+    });
+  }
+
+  function filterTable() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = globalData.filter(row => 
+      (row[12] && row[12].toString().toLowerCase().includes(input)) ||
+      (row[35] && row[35].toString().toLowerCase().includes(input)) ||
+      (row[4] && row[4].toString().toLowerCase().includes(input))
+    );
+    renderTable(filtered);
+  }
+</script>
 </body>
 </html>
