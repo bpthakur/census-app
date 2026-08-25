@@ -48,6 +48,58 @@
     .edit-btn { background: #f39c12; color: white; }
     .delete-btn { background: #e74c3c; color: white; }
     @media print { body * { visibility: hidden; } #print-area, #print-area * { visibility: visible; } #print-area { position: absolute; left: 0; top: 0; width: 100%; } }
+  /* প্রিন্ট বোতামের নিজস্ব স্টাইল */
+    .btn-print {
+      padding: 10px 18px;
+      background-color: #8e44ad;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .btn-print:hover {
+      background-color: #732d91;
+    }
+
+    /* প্রিন্ট পেজ লেআউট ফরম্যাটিং */
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      /* প্রিন্টের সময় অপ্রয়োজনীয় এলিমেন্ট হাইড রাখা */
+      .nav-tabs, .search-box, .btn-print, .action-btn, #form-tab, h2 {
+        display: none !important;
+      }
+      .container {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #data-tab {
+        display: block !important;
+      }
+      table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+      }
+      th, td {
+        border: 1px solid #000000 !important;
+        padding: 6px !important;
+        color: #000000 !important;
+        font-size: 11px !important;
+      }
+      th {
+        background-color: #f2f2f2 !important;
+        color: #000000 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -356,11 +408,13 @@
     </form>
   </div>
 
-  <!-- Tab 2: Data & Search -->
+ <!-- Tab 2: Data & Search -->
   <div id="data-tab" class="tab-content">
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="প্রধানের নাম, ফোন নম্বর বা গৃহ নং দিয়ে খুঁজুন..." onkeyup="filterTable()">
-      <button onclick="window.print()" style="padding:10px; background:#8e44ad; color:white; border:none; border-radius:4px; cursor:pointer;">প্রিন্ট করুন</button>
+      <button type="button" class="btn-print" onclick="window.print()">
+        🖨️ প্রিন্ট করুন
+      </button>
     </div>
 
     <div id="print-area" style="overflow-x:auto;">
